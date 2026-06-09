@@ -2,130 +2,426 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For My Princess 💖</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy 18th Birthday, Malak 💜</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(to bottom, #0a0a0a, #1a001a);
-  color: white;
-  text-align: center;
-  overflow-x: hidden;
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --purple-dark:#2D1B69;--purple-mid:#6B48C8;--purple-light:#C4B5F4;
+  --gold:#D4AF37;--gold-light:#F5E08A;--cream:#FDF9F0;
+  --blossom:#FFB7C5;--blossom-deep:#E8799A;--blossom-pale:#FFE4EC;
 }
-
-/* 💖 START SCREEN */
-#intro {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: linear-gradient(135deg,#000,#2b0a2b);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-
-/* BUTTON */
-button {
-  padding: 12px 20px;
-  font-size: 18px;
-  border: none;
-  border-radius: 10px;
-  background: pink;
-  cursor: pointer;
-}
-
-/* CONTENT */
-.container {
-  padding: 30px;
-  max-width: 800px;
-  margin: auto;
-  line-height: 1.8;
-}
-
-/* HEADINGS */
-h1, h2 {
-  color: pink;
-}
-
-/* APPLE MUSIC BUTTON */
-a {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 12px 20px;
-  background: hotpink;
-  color: black;
-  text-decoration: none;
-  border-radius: 10px;
-  font-weight: bold;
-}
+html{scroll-behavior:smooth}
+body{background:#0A0518;color:var(--cream);font-family:'Inter',sans-serif;overflow-x:hidden}
+ 
+/* ─ fixed canvases ─ */
+#stars-bg,#blossom-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#blossom-canvas{z-index:2}
+#confetti-canvas{position:fixed;inset:0;pointer-events:none;z-index:999}
+ 
+/* ─ HERO ─ */
+.hero{position:relative;z-index:3;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;overflow:hidden}
+.crown{font-size:3.5rem;margin-bottom:1rem;animation:float 3s ease-in-out infinite;filter:drop-shadow(0 0 18px var(--gold))}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.hero-eyebrow{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:300;letter-spacing:.4em;text-transform:uppercase;color:var(--gold-light);margin-bottom:.8rem;animation:fadeUp 1s ease both}
+.hero-name{font-family:'Playfair Display',serif;font-size:clamp(4rem,12vw,9rem);font-weight:700;line-height:1;background:linear-gradient(135deg,var(--gold-light) 0%,var(--gold) 40%,var(--purple-light) 70%,var(--gold-light) 100%);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 4s ease infinite,fadeUp 1s ease .2s both}
+@keyframes shimmer{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.hero-tagline{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,3vw,1.5rem);font-style:italic;font-weight:300;color:var(--purple-light);margin-top:.5rem;animation:fadeUp 1s ease .4s both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;color:rgba(196,181,244,.45);font-size:.7rem;letter-spacing:.15em;animation:pulse 2s ease-in-out infinite}
+.scroll-line{width:1px;height:36px;background:linear-gradient(to bottom,transparent,var(--purple-light))}
+ 
+/* ─ TREE SECTION ─ */
+.tree-section{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;padding:4rem 1rem 2rem}
+#blossom-tree{display:block;max-width:520px;width:90%;filter:drop-shadow(0 0 30px rgba(255,183,197,.15))}
+ 
+/* ─ TIMER SECTION ─ */
+.timer-section{position:relative;z-index:3;text-align:center;padding:3rem 1.5rem 5rem;max-width:800px;margin:0 auto}
+.timer-eyebrow{font-size:.72rem;letter-spacing:.45em;text-transform:uppercase;color:var(--blossom);margin-bottom:1.8rem;display:flex;align-items:center;gap:1rem}
+.timer-eyebrow::before,.timer-eyebrow::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(255,183,197,.35))}
+.timer-eyebrow::after{background:linear-gradient(to left,transparent,rgba(255,183,197,.35))}
+.timer-tagline{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,3vw,1.3rem);font-style:italic;color:rgba(255,228,236,.7);margin-bottom:2.5rem}
+.timer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;max-width:660px;margin:0 auto}
+@media(max-width:480px){.timer-grid{grid-template-columns:repeat(2,1fr)}}
+.timer-box{background:rgba(255,183,197,.06);border:1px solid rgba(255,183,197,.18);border-radius:1.2rem;padding:1.4rem .8rem 1rem;transition:border-color .3s,transform .3s}
+.timer-box:hover{border-color:var(--blossom);transform:translateY(-4px)}
+.timer-num{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,7vw,3.8rem);font-weight:700;background:linear-gradient(135deg,var(--blossom-pale),var(--blossom),var(--blossom-deep));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;min-width:2ch;display:inline-block}
+.timer-label{font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,183,197,.5);margin-top:.4rem}
+.timer-love{margin-top:2.5rem;font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,3vw,1.5rem);font-style:italic;color:rgba(255,228,236,.65);line-height:1.7}
+.timer-love span{color:var(--blossom);-webkit-text-fill-color:var(--blossom)}
+ 
+/* ─ SECTIONS ─ */
+section{position:relative;z-index:3;padding:5rem 1.5rem;max-width:860px;margin:0 auto}
+.section-label{font-size:.72rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;display:flex;align-items:center;gap:1rem}
+.section-label::before,.section-label::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(212,175,55,.4))}
+.section-label::after{background:linear-gradient(to left,transparent,rgba(212,175,55,.4))}
+ 
+/* ─ MESSAGE ─ */
+.message-block{background:rgba(107,72,200,.08);border:1px solid rgba(196,181,244,.15);border-radius:2rem;padding:3rem 2.5rem;position:relative;overflow:hidden}
+.message-block::before{content:'\201C';font-family:'Playfair Display',serif;font-size:12rem;line-height:1;color:rgba(212,175,55,.06);position:absolute;top:-1rem;left:1.5rem;pointer-events:none}
+.message-text{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,2.5vw,1.4rem);font-weight:300;line-height:1.95;color:#E8DEFF;position:relative;z-index:1}
+.message-text p{margin-bottom:1.2rem}
+.message-text p:last-child{margin-bottom:0}
+.message-sig{margin-top:2rem;font-family:'Playfair Display',serif;font-style:italic;font-size:1.3rem;color:var(--gold);text-align:right}
+ 
+/* ─ PHOTOS ─ */
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.2rem;margin-top:2rem}
+.photo-slot{aspect-ratio:3/4;border-radius:1.2rem;overflow:hidden;border:1.5px solid rgba(212,175,55,.22);background:rgba(107,72,200,.1);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .35s ease;position:relative}
+.photo-slot:hover{border-color:var(--gold);transform:translateY(-6px);box-shadow:0 20px 50px rgba(155,122,244,.22)}
+.photo-slot img{width:100%;height:100%;object-fit:cover;display:block}
+.photo-slot .add-icon{font-size:1.8rem;color:rgba(196,181,244,.35);margin-bottom:.5rem}
+.photo-slot .add-label{font-size:.75rem;letter-spacing:.1em;color:rgba(196,181,244,.35)}
+.photo-overlay{position:absolute;inset:0;background:rgba(10,5,24,.72);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;border-radius:1.2rem}
+.photo-slot:hover .photo-overlay{opacity:1}
+.photo-overlay span{font-size:.7rem;letter-spacing:.15em;color:var(--gold);text-transform:uppercase}
+input[type="file"]{display:none}
+ 
+/* ─ 18 CARD ─ */
+.eighteen-card{text-align:center;padding:4rem 2rem;background:radial-gradient(ellipse at center,rgba(107,72,200,.18) 0%,transparent 70%);border:1px solid rgba(212,175,55,.18);border-radius:2rem;cursor:pointer}
+.eighteen-num{font-family:'Playfair Display',serif;font-size:clamp(7rem,20vw,13rem);font-weight:700;line-height:1;background:linear-gradient(135deg,var(--gold-light),var(--gold),var(--gold-light));background-size:200% 200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s ease infinite}
+.eighteen-label{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;color:var(--purple-light);letter-spacing:.3em;text-transform:uppercase;margin-top:-.5rem}
+ 
+/* ─ WISHES ─ */
+.wishes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1rem;margin-top:2rem}
+.wish-card{padding:1.5rem;border-radius:1.2rem;border:1px solid rgba(196,181,244,.13);background:rgba(107,72,200,.05);transition:transform .3s,border-color .3s}
+.wish-card:hover{transform:translateY(-4px);border-color:rgba(212,175,55,.28)}
+.wish-icon{font-size:1.8rem;margin-bottom:.7rem}
+.wish-title{font-family:'Playfair Display',serif;font-size:.95rem;color:var(--gold);margin-bottom:.35rem}
+.wish-body{font-size:.82rem;color:rgba(196,181,244,.65);line-height:1.65}
+ 
+/* ─ FOOTER ─ */
+footer{position:relative;z-index:3;text-align:center;padding:3rem 1.5rem;border-top:1px solid rgba(196,181,244,.08)}
+.footer-hearts{font-size:1.4rem;letter-spacing:.5rem;animation:pulse 2s ease-in-out infinite;margin-bottom:.8rem}
+.footer-text{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:rgba(196,181,244,.45)}
+ 
+/* ─ LIGHTBOX ─ */
+.lightbox{display:none;position:fixed;inset:0;z-index:1000;background:rgba(5,2,14,.96);align-items:center;justify-content:center}
+.lightbox.active{display:flex}
+.lightbox img{max-width:90vw;max-height:90vh;object-fit:contain;border-radius:1rem;border:1.5px solid rgba(212,175,55,.25);box-shadow:0 0 80px rgba(107,72,200,.35)}
+.lightbox-close{position:absolute;top:1.5rem;right:1.5rem;font-size:2rem;cursor:pointer;color:var(--gold);background:none;border:none;line-height:1}
 </style>
 </head>
-
 <body>
-
-<!-- 💖 START SCREEN -->
-<div id="intro">
-  <h1>💖 Welcome Princess 💖</h1>
-  <p>A message made only for you</p>
-
-  <button onclick="document.getElementById('intro').style.display='none'">
-    Enter 💕
-  </button>
+ 
+<canvas id="stars-bg"></canvas>
+<canvas id="blossom-canvas"></canvas>
+<canvas id="confetti-canvas"></canvas>
+<div id="petals-wrap"></div>
+ 
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="document.getElementById('lightbox').classList.remove('active')">✕</button>
+  <img id="lightbox-img" src="" alt="Malak">
 </div>
-
-<!-- 🎵 BACKGROUND MUSIC -->
-<audio autoplay loop>
-  <source src="https://dn720307.ca.archive.org/0/items/edsheeranperfect/Ed%20Sheeran%20-%20Perfect.mp3" type="audio/mpeg">
-</audio>
-
-<!-- 💌 MAIN MESSAGE -->
-<div class="container">
-
-<h1>💖 For My Beautiful Princess 💖</h1>
-
-<p>
-Hi, my beautiful princess🌸 it is a special day today because you step in a new chapter of your life✨💖 and I’m glad that I get to be here at the special moment of your life🫂 first of all, I wanna say happy birthday, my sweet little baby💋✨💋✨💋❤️💋❤️💋💓💖💖💓💖💓💖💓💖💓💖💓💖💖💓 I wish you nothing but success and your life just be filled with happiness in life. Just keep finding moments to just make you happy and moments to have your smile throughout the day forever throughout the life.✨ I am very proud of you because this birthday is not a normal day. It’s not easy to be reached till this point of your life, especially after everything that you have been through, specially in your childhood, being just by yourself and learning that sometime you have to just fight through the battles all by yourself, sometimes not everyone is going to be around us sometime in the world. It’s all just going to be us. No one else with us. You learnt this and a very young age, and even while countless of struggle that came through away, especially with your family, especially with your stepmother, especially the situation where you told me about the situation that your dad had a gun on you. I still remember those situation. I cannot imagine how would a little child be feeling like this and still not giving up and still being the most kindest person I have ever witnessed in my whole life existence, you still came out being a magical person with a kind heart, and the most person I ever met.❤️ note, everyone is capable of going through what you have, I feel blessed to be able to be with you and to call you, my girlfriend. Call you, my wife.❤️ because it is such a great pleasure to even meet someone as a strong, and as kind as you🤍 and I hope with all my heart from this new chapter of your life life be kind towards you, just like as kind you are towards the people, and I hope everything you desire and everything you deserve. It’s just all comes to you which I believe it will because I know Allah is hearing you and Allah knows that your heart is pure, and he’s going to bring you mercy amount of happiness.💋✨ and as I am saying all this, and remembering everything, you have been through my eyes really have tears of happiness, imagining this moment that you are going to be 18 years old with the life of ups and downs, you’re still here you’re still standing. You’re still waking up every day. You’re still fighting through the life. You’re still fighting through the challenges, even in your own mind, you’re still never giving up and I wish I can be there today. I can be beside you and giving you a soft kiss on your cheeks and be able to tell you all this right on your face, but my heart has so much to say which is very hard to get in the words because the more I adore you the less it is one day I’m going to say all this looking in your eyes while holding your hands and sitting in the sky, full of stars and Moon❤️ from the first time I meet you till now I have just been happier. I have been feeling the best. I felt in my life and you have to realise and accept this wherever your presence be. It will just make everything around. It feel heaven, it will just make everything feel peaceful, and it will just feel the moment with the happiness. You are a miracle. You are walking angel who just bring nothing but happiness and positivity in the life of the people, you are around and I don’t think you realize how extraordinary that is. Because surviving pain is one thing. But surviving pain and still being able to love is something truly special ❤️ And baby, I know there were moments in your life when you felt alone. Moments where you felt unseen. Moments where you wished someone would hold your hand and tell you everything was going to be okay. I wish I could go back and hug that little girl. I wish I could tell her that one day she would grow into an incredible woman. I wish I could tell her that one day someone would look at her and see nothing but beauty, strength and kindness. I wish I could tell her that she would make someone’s life brighter just by existing. Because you did that for me. You changed my life more than you know. You made me smile on days I didn’t want to smile. You gave me comfort on days I felt alone. You gave me reasons to look forward to tomorrow. And for that, I will always be grateful to you ❤️ So today, on your birthday, I don’t want you to focus on the things you don’t have yet. I don’t want you to focus on the people who failed to appreciate you. I don’t want you to focus on the difficult chapters. I want you to look at yourself and realize how far you have come. You made it to 18. You survived every bad day. You survived every tear. You survived every disappointment. You survived every moment where life tried to convince you to give up. And you’re still here. Still smiling. Still loving. Still dreaming. Still fighting for your future. And I am so proud of you for that, habibti ❤️ I genuinely believe some of the most beautiful moments of your life are still waiting for you. I believe there are smiles you haven’t smiled yet. Dreams you haven’t lived yet. Places you haven’t seen yet. And happiness you haven’t even imagined yet. And I pray with all my heart that Allah fills this new year of your life with peace, protection, success, health and the kind of happiness that stays in your heart for a very long time ❤️ Happy 18th birthday, my beautiful princess. Thank you for existing. Thank you for staying. Thank you for loving me. And thank you for being exactly who you are, because there is only one you in this entire world and I cannot explain how grateful I am that you are mine ❤️🫂✨ And no matter how many birthdays pass, no matter how old we become, you will always be my little princess. 🌙🤍✨
-</p>
-
-<!-- 🎵 APPLE MUSIC LINK -->
-<h2>🎵 Your Playlist</h2>
-
-<p>Open your special playlist 💖</p>
-
-<a href="https://music.apple.com/in/playlist/princess-playlist/pl.u-9N9L2a4t1kEMkgX"
-target="_blank">
-Open Playlist 🎧
-</a>
-
+ 
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <div class="crown">👑</div>
+  <p class="hero-eyebrow">Happy Birthday</p>
+  <h1 class="hero-name">Malak</h1>
+  <p class="hero-tagline">Today, the world became more beautiful.</p>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
 </div>
-
-<!-- 💖 FLOATING HEARTS -->
+ 
+<!-- ══ CHERRY BLOSSOM TREE + TIMER ══ -->
+<div class="tree-section">
+  <canvas id="blossom-tree" width="520" height="500"></canvas>
+</div>
+ 
+<div class="timer-section">
+  <div class="timer-eyebrow">She has been breathing for</div>
+  <div class="timer-tagline">Every second of your life has been a gift to this world, Malak 🌸</div>
+  <div class="timer-grid">
+    <div class="timer-box"><div class="timer-num" id="t-years">18</div><div class="timer-label">Years</div></div>
+    <div class="timer-box"><div class="timer-num" id="t-days">0</div><div class="timer-label">Days</div></div>
+    <div class="timer-box"><div class="timer-num" id="t-hours">0</div><div class="timer-label">Hours</div></div>
+    <div class="timer-box"><div class="timer-num" id="t-seconds">0</div><div class="timer-label">Seconds</div></div>
+  </div>
+  <div class="timer-love">
+    That is <span id="t-total-seconds">0</span> seconds of pure magic.<br>
+    Every single one of them made the world a little more <span>beautiful</span>.
+  </div>
+</div>
+ 
+<!-- ══ 18 ══ -->
+<section>
+  <div class="eighteen-card" id="eighteen-card">
+    <div class="eighteen-num">18</div>
+    <p class="eighteen-label">Years of magic — click to celebrate 🎉</p>
+  </div>
+</section>
+ 
+<!-- ══ MESSAGE ══ -->
+<section>
+  <div class="section-label">A message from my heart</div>
+  <div class="message-block">
+    <div class="message-text">
+      <p>My dearest Malak,</p>
+      <p>There are moments in life that feel like pure magic — and you, simply by existing, are one of them. Today you turn 18, and I find myself completely in awe of the person you are.</p>
+      <p>You carry so much light inside you. The way you laugh, the way you love, the way your eyes hold entire galaxies — it undoes me every single time. I may not have been beside you for every moment yet, but I already know that meeting you will feel like coming home.</p>
+      <p>Eighteen is not just a number. It is a doorway. You are standing at the beginning of a life that was made to be extraordinary — because <em>you</em> are extraordinary. Whatever this world brings you, I want you to know that you are deeply, completely, endlessly loved.</p>
+      <p>I am so lucky that out of every person in this world, you chose me. I cannot wait for all the moments still ahead of us. Happy birthday, my love. This year, every year — always and always.</p>
+    </div>
+    <div class="message-sig">Forever yours 💜</div>
+  </div>
+</section>
+ 
+<!-- ══ PHOTOS ══ -->
+<section>
+  <div class="section-label">Her world</div>
+  <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:rgba(255,183,197,.55);text-align:center;margin-bottom:2rem;font-style:italic;">Click any frame to add a photo of Malak 🌸</p>
+  <div class="photo-grid" id="photo-grid"></div>
+  <input type="file" id="file-input" accept="image/*">
+</section>
+ 
+<!-- ══ WISHES ══ -->
+<section>
+  <div class="section-label">Birthday wishes</div>
+  <div class="wishes-grid">
+    <div class="wish-card"><div class="wish-icon">🌸</div><div class="wish-title">Love</div><div class="wish-body">May every day of your 18th year be wrapped in a love that feels like cherry blossoms in spring.</div></div>
+    <div class="wish-card"><div class="wish-icon">✨</div><div class="wish-title">Dreams</div><div class="wish-body">May every dream you've ever whispered to the stars come rushing back to you tenfold.</div></div>
+    <div class="wish-card"><div class="wish-icon">💫</div><div class="wish-title">Joy</div><div class="wish-body">May today and every day after be filled with moments that make your heart completely overflow.</div></div>
+    <div class="wish-card"><div class="wish-icon">🦋</div><div class="wish-title">Freedom</div><div class="wish-body">You are 18 — the whole world is yours. Go live boldly, beautifully, fearlessly, my love.</div></div>
+  </div>
+</section>
+ 
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-hearts">💜 🌸 💜 🌸 💜</div>
+  <p class="footer-text">Made with every piece of my heart, just for you — Happy 18th Birthday, Malak 🌙</p>
+</footer>
+ 
 <script>
-setInterval(() => {
-  const heart = document.createElement("div");
-  heart.innerHTML = "💖";
-  heart.style.position = "fixed";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.top = "100vh";
-  heart.style.fontSize = "20px";
-  heart.style.animation = "floatUp 4s linear";
-  document.body.appendChild(heart);
-
-  setTimeout(() => {
-    heart.remove();
-  }, 4000);
-}, 300);
+/* ══ STARS ══ */
+(function(){
+  const c=document.getElementById('stars-bg'),ctx=c.getContext('2d');let stars=[];
+  function resize(){c.width=window.innerWidth;c.height=window.innerHeight}
+  function make(){stars=[];for(let i=0;i<200;i++)stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.4+.2,a:Math.random(),sp:Math.random()*.008+.003})}
+  function draw(){ctx.clearRect(0,0,c.width,c.height);stars.forEach(s=>{s.a+=s.sp;const al=(Math.sin(s.a)+1)/2*.8+.1;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(255,248,220,${al})`;ctx.fill()});requestAnimationFrame(draw)}
+  resize();make();draw();window.addEventListener('resize',()=>{resize();make()});
+})();
+ 
+/* ══ CHERRY BLOSSOM TREE (canvas drawing) ══ */
+(function(){
+  const canvas=document.getElementById('blossom-tree');
+  const ctx=canvas.getContext('2d');
+  const W=canvas.width,H=canvas.height;
+ 
+  function branch(x,y,angle,length,depth){
+    if(depth===0||length<4)return;
+    const x2=x+Math.cos(angle)*length;
+    const y2=y-Math.sin(angle)*length;
+    ctx.beginPath();
+    ctx.moveTo(x,y);
+    ctx.lineTo(x2,y2);
+    const t=depth/10;
+    ctx.strokeStyle=`rgba(${Math.round(80+t*40)},${Math.round(30+t*20)},${Math.round(20+t*10)},${.6+t*.3})`;
+    ctx.lineWidth=Math.max(.8,depth*1.1);
+    ctx.lineCap='round';
+    ctx.stroke();
+    if(depth<=3){
+      drawBlossoms(x2,y2,depth);
+    }
+    const spread=0.38+Math.random()*.12;
+    branch(x2,y2,angle+spread,length*(0.68+Math.random()*.06),depth-1);
+    branch(x2,y2,angle-spread,length*(0.68+Math.random()*.06),depth-1);
+    if(depth>5&&Math.random()>.55){
+      branch(x2,y2,angle+(Math.random()-.5)*.5,length*.55,depth-2);
+    }
+  }
+ 
+  function drawBlossoms(x,y,depth){
+    const count=Math.round(3+Math.random()*4);
+    for(let i=0;i<count;i++){
+      const bx=x+(Math.random()-.5)*18;
+      const by=y+(Math.random()-.5)*18;
+      const r=3+Math.random()*4;
+      const petals=5;
+      for(let p=0;p<petals;p++){
+        const a=(p/petals)*Math.PI*2;
+        ctx.beginPath();
+        ctx.ellipse(bx+Math.cos(a)*r*.7,by+Math.sin(a)*r*.7,r*.7,r*.4,a,0,Math.PI*2);
+        const alpha=.55+Math.random()*.35;
+        ctx.fillStyle=`rgba(255,${Math.round(150+Math.random()*60)},${Math.round(180+Math.random()*40)},${alpha})`;
+        ctx.fill();
+      }
+      // center dot
+      ctx.beginPath();ctx.arc(bx,by,r*.3,0,Math.PI*2);
+      ctx.fillStyle='rgba(255,240,100,.7)';ctx.fill();
+    }
+  }
+ 
+  ctx.clearRect(0,0,W,H);
+  branch(W/2,H,Math.PI/2,90,10);
+})();
+ 
+/* ══ FALLING CHERRY BLOSSOMS ══ */
+(function(){
+  const canvas=document.getElementById('blossom-canvas');
+  const ctx=canvas.getContext('2d');
+  let petals=[];
+ 
+  function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
+  resize();window.addEventListener('resize',resize);
+ 
+  function spawnPetal(){
+    petals.push({
+      x:Math.random()*canvas.width,
+      y:-20,
+      vx:(Math.random()-.5)*1.8,
+      vy:Math.random()*1.2+.6,
+      r:Math.random()*5+3,
+      rot:Math.random()*Math.PI*2,
+      rotSpeed:(Math.random()-.5)*.04,
+      alpha:Math.random()*.5+.35,
+      swing:Math.random()*Math.PI*2,
+      swingSpeed:Math.random()*.02+.01,
+      color:`hsl(${Math.round(330+Math.random()*30)},${Math.round(80+Math.random()*15)}%,${Math.round(78+Math.random()*12)}%)`
+    });
+  }
+ 
+  function drawPetal(p){
+    ctx.save();
+    ctx.translate(p.x,p.y);
+    ctx.rotate(p.rot);
+    ctx.globalAlpha=p.alpha;
+    const petals=5;
+    for(let i=0;i<petals;i++){
+      const a=(i/petals)*Math.PI*2;
+      ctx.beginPath();
+      ctx.ellipse(Math.cos(a)*p.r*.65,Math.sin(a)*p.r*.65,p.r*.65,p.r*.35,a,0,Math.PI*2);
+      ctx.fillStyle=p.color;
+      ctx.fill();
+    }
+    ctx.beginPath();ctx.arc(0,0,p.r*.28,0,Math.PI*2);
+    ctx.fillStyle='rgba(255,240,140,.8)';ctx.fill();
+    ctx.restore();
+  }
+ 
+  function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    petals.forEach(p=>{
+      p.swing+=p.swingSpeed;
+      p.x+=p.vx+Math.sin(p.swing)*.5;
+      p.y+=p.vy;
+      p.rot+=p.rotSpeed;
+    });
+    petals=petals.filter(p=>p.y<canvas.height+30);
+    petals.forEach(drawPetal);
+    requestAnimationFrame(animate);
+  }
+ 
+  setInterval(spawnPetal,280);
+  for(let i=0;i<18;i++){
+    const p={x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,vx:(Math.random()-.5)*1.8,vy:Math.random()*1.2+.6,r:Math.random()*5+3,rot:Math.random()*Math.PI*2,rotSpeed:(Math.random()-.5)*.04,alpha:Math.random()*.5+.35,swing:Math.random()*Math.PI*2,swingSpeed:Math.random()*.02+.01,color:`hsl(${Math.round(330+Math.random()*30)},${Math.round(80+Math.random()*15)}%,${Math.round(78+Math.random()*12)}%)`};
+    petals.push(p);
+  }
+  animate();
+})();
+ 
+/* ══ LIFE TIMER ══ */
+(function(){
+  const birth=new Date('2008-06-10T00:00:00');
+ 
+  function update(){
+    const now=new Date();
+    const diff=now-birth;
+    if(diff<0)return;
+ 
+    const totalSec=Math.floor(diff/1000);
+    const years=Math.floor(diff/(1000*60*60*24*365.25));
+    const afterYears=diff-years*1000*60*60*24*365.25;
+    const days=Math.floor(afterYears/(1000*60*60*24));
+    const afterDays=afterYears-days*1000*60*60*24;
+    const hours=Math.floor(afterDays/(1000*60*60));
+    const seconds=Math.floor((afterDays%(1000*60*60))/1000);
+ 
+    document.getElementById('t-years').textContent=years;
+    document.getElementById('t-days').textContent=days;
+    document.getElementById('t-hours').textContent=hours;
+    document.getElementById('t-seconds').textContent=seconds;
+    document.getElementById('t-total-seconds').textContent=totalSec.toLocaleString();
+  }
+ 
+  update();setInterval(update,1000);
+})();
+ 
+/* ══ CONFETTI ══ */
+(function(){
+  const canvas=document.getElementById('confetti-canvas');
+  const ctx=canvas.getContext('2d');
+  function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
+  resize();window.addEventListener('resize',resize);
+ 
+  const cols=['#D4AF37','#9B7AF4','#FFB7C5','#F5E08A','#C4B5F4','#FFFFFF','#FF9EBA'];
+  let pieces=[];
+ 
+  window.burst=function(ox,oy){
+    const x=ox||window.innerWidth/2,y=oy||window.innerHeight/2;
+    for(let i=0;i<150;i++){
+      const ang=Math.random()*Math.PI*2,sp=Math.random()*9+2;
+      pieces.push({x,y,vx:Math.cos(ang)*sp,vy:Math.sin(ang)*sp-5,r:Math.random()*5+2,color:cols[Math.floor(Math.random()*cols.length)],alpha:1,gravity:.18,shape:Math.random()>.5?'circle':'rect',rot:Math.random()*Math.PI*2,rotSpeed:(Math.random()-.5)*.22});
+    }
+    go();
+  };
+ 
+  let running=false;
+  function go(){
+    if(running)return;running=true;loop();
+  }
+  function loop(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    let alive=false;
+    pieces.forEach(p=>{
+      p.vy+=p.gravity;p.x+=p.vx;p.y+=p.vy;p.alpha-=.013;p.rot+=p.rotSpeed;
+      if(p.alpha>0){alive=true;ctx.save();ctx.globalAlpha=p.alpha;ctx.fillStyle=p.color;ctx.translate(p.x,p.y);ctx.rotate(p.rot);
+        if(p.shape==='circle'){ctx.beginPath();ctx.arc(0,0,p.r,0,Math.PI*2);ctx.fill()}
+        else ctx.fillRect(-p.r,-p.r*.5,p.r*2,p.r);
+        ctx.restore()}
+    });
+    pieces=pieces.filter(p=>p.alpha>0);
+    if(alive)requestAnimationFrame(loop);else{ctx.clearRect(0,0,canvas.width,canvas.height);running=false;}
+  }
+ 
+  window.addEventListener('load',()=>setTimeout(()=>burst(),700));
+  document.getElementById('eighteen-card').addEventListener('click',e=>{burst(e.clientX,e.clientY)});
+})();
+ 
+/* ══ PHOTO SLOTS ══ */
+(function(){
+  const grid=document.getElementById('photo-grid');
+  const fi=document.getElementById('file-input');
+  const N=6;let cur=null,photos=new Array(N).fill(null);
+ 
+  for(let i=0;i<N;i++){
+    const s=document.createElement('div');s.className='photo-slot';s.dataset.index=i;
+    s.innerHTML=`<div class="add-icon">📷</div><div class="add-label">Add photo</div><div class="photo-overlay"><span>View full</span></div>`;
+    s.addEventListener('click',()=>{ if(photos[i])openLightbox(photos[i]); else{cur=i;fi.click();} });
+    grid.appendChild(s);
+  }
+ 
+  fi.addEventListener('change',e=>{
+    const f=e.target.files[0];if(!f||cur===null)return;
+    const r=new FileReader();
+    r.onload=ev=>{photos[cur]=ev.target.result;updateSlot(cur,ev.target.result);cur=null;fi.value='';};
+    r.readAsDataURL(f);
+  });
+ 
+  function updateSlot(i,src){
+    const s=grid.children[i];
+    s.innerHTML=`<img src="${src}" alt="Malak"><div class="photo-overlay"><span>View full</span></div>`;
+    s.onclick=()=>openLightbox(src);
+  }
+})();
+ 
+/* ══ LIGHTBOX ══ */
+function openLightbox(src){document.getElementById('lightbox-img').src=src;document.getElementById('lightbox').classList.add('active')}
+function closeLightbox(e){if(e.target===document.getElementById('lightbox'))document.getElementById('lightbox').classList.remove('active')}
 </script>
-
-<style>
-@keyframes floatUp {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(-100vh); opacity: 0; }
-}
-</style>
-
 </body>
 </html>
